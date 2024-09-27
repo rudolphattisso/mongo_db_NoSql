@@ -1,0 +1,63 @@
+1 - Afficher tous les titres de films de "Spielberg" et du genre "Aventure".
+db.films.find({"director.last_name": "Spielberg"},{"genre" : "Aventure"})
+
+2 - Afficher tous les titres des films parus en 2000.
+db.films.find({"year" : 2000})
+
+3 - Afficher tous les titres des films du genre "Action".
+db.films.find({"genre" : "Action"}, {"title" : 1})
+
+4 - Afficher la liste de tous les "genres" de la collection sans doublon. En travaillant en mode console, vous allez stocker le résultat de cette requête dans une variable JavaScript, puis vous allez interroger de façon usuelle cette variable pour connaître le nombre de genres présents dans cette collection.
+
+let genre =  db.films.distinc("genre") //stocker dans la variable JS
+genre.length // nombre d'éléments dans la variable
+
+
+5 - Afficher les titres des films français et leur date de sortie.
+db.films.find({"country": "FR"},{"year":1, "titles":1 })
+
+
+6 - Afficher les titres des films et leur année de sortie dans lesquels "Uma Thurman" a joué.
+db.films.find({"actors.last_name": "Thurman", "actors.first_name" : "Uma"},{"year":1, "title":1 })
+
+7 - Quel est le réalisateur du film "Memento".
+db.films.find({"title" : "Memento"} , { "director.last_name" : 1, "director.first_name" : 1})
+
+8 - Afficher les noms et prénoms des acteurs qui ont joué dans "Apocalypse Now".
+db.films.find({"title" : "Apocalypse Now"} , { "actors.last_name" : 1, "actors.first_name" : 1})
+
+9 - Afficher les titres des films sorties entre 1968 et 1978 inclus.
+db.films.find({ year: { $gte: 1968, $lte: 1978 } }, { title: 1 , year : 1}  
+
+10 - Afficher les titres ainsi que l'année de sortie des films sorties avant l'année 1968 comprise (la même question mais année 1968 non comprise).
+db.films.find({ year: { $lte: 1968 } }, { title: 1 , year : 1})
+
+11 - La même question que la précédente mais en triant la sortie par années croissantes, par années décroissantes. Enfin, vous n'afficherez cette fois que 5 lignes.
+
+db.films.find({ year: { $lte: 1968 } }, { title: 1 , year : 1}).limit(5).sort({"year" : -1})
+
+12 - Afficher tous les titres de films du genre "Action" ou "Aventure" ordonnés par genre.
+
+
+13 - Afficher tous les titres de film dont le réalisateur n'est pas "Tarentino".
+
+
+14 : Afficher le nombre de films par genre en utilisant ici l’agrégation et les opérateurs $group (équivalent du Group By en SQL classique) et $sum (équivalent du SUM en SQL classique). Vous pourrez aussi utiliser l’interface proposée par MongoDB Compass pour composer cette requête d’agrégation. 
+
+
+15 – Compter le nombre de documents qui composent cette collection et pour lesquels l’année de sortie du film est supérieure ou égale à l’année 2000. Vous pourrez vous intéresser à la fonction countDocuments().
+
+
+16 – Afficher le titre et l’année de sortie du films de la collection dont le pitch contient la chaîne de caractères : "la guerre du Vietnam".
+
+
+17 – Afficher les titres et l’année de sortie des films de la collection dans lesquels jouait l’acteur "Robert Redford".
+
+
+18 – Afficher uniquement les titres des films de la collection dont le champ summary contient la chaîne de caractères "famille " . Vous pourrez utiliser ici l’opérateur $regex.
+
+
+19 - Modifier l'année de sortie du Film "La Guerre des étoiles" en 1978 au lieu de 1977.
+
+
+20 – Écrire dans la console de MongoDB Compass un petit programme JavaScript qui permet d’afficher la liste des titres de films dans lesquels joue l’acteur "Clint Eastwood".
